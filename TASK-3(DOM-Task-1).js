@@ -2,7 +2,7 @@
 let headerTitle=document.getElementById('main-header');
 headerTitle.style.borderBottom='solid 3px #000';
 
-//FOR QUESTION 3) - Now make ADD ITEM bold and change the font color to greeen
+//FOR QUESTION 3) - Now make ADD ITEM bold and change the font color to green
 let addItemTitle=document.getElementsByClassName('title')
 addItemTitle[0].style.fontWeight='bold';
 addItemTitle[0].style.color='green';

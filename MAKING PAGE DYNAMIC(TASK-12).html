@@ -10,7 +10,7 @@
     <script>
         const posts=[
             {title: 'Post One', body: 'This is post one'},
-            {title: 'Post Two', body: 'This is post one'}
+            {title: 'Post Two', body: 'This is post two'}
         ];
         const user={
             name: 'User One',
@@ -34,9 +34,18 @@
         }
         console.log("Before creating post,\nPosts =>",posts,`\nlastActivityTime => ${user.lastActivityTime}`)
         Promise.all([createPost({title:'Post Three',body:'This is post three'}),updateLastUserActivityTime()]).then(values=>{
-            console.log("After creating post,")
-            console.log("Posts =>",values[0])
-            console.log(`lastActivityTime => ${values[1]}`)
+            console.log("After creating post,\nPosts =>",values[0],`\nlastActivityTime => ${values[1]}`);
+        })
+        function deletion(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    posts.pop();
+                    resolve(posts);
+                },1000);
+            });
+        }
+        deletion().then((msg)=>{
+            console.log("After Deletion,\nPosts =>",msg);
         })
     </script> 
 </body>

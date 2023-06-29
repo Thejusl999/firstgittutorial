@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const posts=[
+            {title: 'Post One', body: 'This is post one'},
+            {title: 'Post Two', body: 'This is post one'}
+        ];
+        const user={
+            name: 'User One',
+            lastActivityTime: new Date()
+        }
+        function createPost(post) {
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    posts.push(post);
+                    resolve(posts);
+                },1000);
+            });
+        }
+        function updateLastUserActivityTime(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    user.lastActivityTime=new Date();
+                    resolve(user.lastActivityTime);     
+                },1000);
+            });
+        }
+        console.log("Before creating post,\nPosts =>",posts,`\nlastActivityTime => ${user.lastActivityTime}`)
+        Promise.all([createPost({title:'Post Three',body:'This is post three'}),updateLastUserActivityTime()]).then(values=>{
+            console.log("After creating post,")
+            console.log("Posts =>",values[0])
+            console.log(`lastActivityTime => ${values[1]}`)
+        })
+    </script> 
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELIVERABLE-2(TASK)</title>
+</head>
+<body>
+<script>
+
+//TASK - USING PROMISES
+console.log('person1:shows ticket');
+console.log('person2:shows ticket');
+
+    const promiseWifeBringsTicks=new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve('ticket'),3000);
+    });
+    const getPopcorn = promiseWifeBringsTicks.then((ticket)=>{
+        console.log('wife: i bought the tickets');
+        console.log('husband: we should go in');
+        console.log('wife: no i am hungry');
+        return new Promise((resolve,reject)=>resolve(`${ticket} popcorn`));
+    });
+    const getButter = getPopcorn.then((ticket)=>{
+        console.log('husband: i got popcorn');
+        console.log('husband: we should go in');
+        console.log('wife: i need butter on my popcorn');
+        return new Promise((resolve,reject)=>resolve(`${ticket} butter`));
+    });
+    //(4)-NEW PROMISE (getColdDrinks)
+    const getColdDrinks= getButter.then((ticket)=>{
+        console.log('husband: i love cold drinks with popcorn');
+        console.log('wife: me too!');
+        return new Promise((resolve,reject)=>resolve(`${ticket} cold-drinks`));
+    });
+    getColdDrinks.then((ticket)=>console.log(ticket));
+
+console.log('person4:shows ticket');
+console.log('person5:shows ticket');
+
+
+
+
+
+//TASK - USING ASYNC AWAIT
+console.log('person1: shows ticket');
+console.log('person2: shows ticket'); 
+
+const preMovie=async()=>{
+    const promiseWifeBringsTicks=new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve('ticket'),3000);
+    }); //(A)
+    const getPopcorn = new Promise((resolve,reject)=>resolve('popcorn'));
+    const getButter = new Promise((resolve,reject)=>resolve('butter'));
+    const getColdDrinks = new Promise((resolve,reject)=>resolve('coldDrinks'));
+
+    let ticket=await promiseWifeBringsTicks;
+    console.log(`wife: i bought the ${ticket}`);
+    console.log('husband: we should go in');
+    console.log('wife: no i am hungry');
+
+    let popcorn=await getPopcorn;
+    console.log(`husband: i got ${popcorn}`);
+    console.log('husband: we should go in');
+    console.log('wife: i need butter on my popcorn');
+
+    let butter=await getButter;
+    console.log(`husband: i got some ${butter} on popcorn`);
+    console.log('husband: anything else darling?');
+    console.log('wife: lets go we are getting late');
+    console.log('husband: thank you for the reminder *grins*');
+
+    let coldDrinks=await getColdDrinks;
+    console.log(`husband: i need some ${coldDrinks}`);
+    console.log('wife: me too!');
+    return ticket;
+}
+preMovie().then((m)=>console.log(`person3: shows ${m}`));
+
+console.log('person4: shows ticket');
+console.log('person5: shows ticket'); 
+
+
+
+
+
+//TASK - USING ASYNC AWAIT WITH PROMISE.ALL
+console.log('person1: shows ticket');
+console.log('person2: shows ticket'); 
+
+const preMovie=async()=>{
+    const promiseWifeBringsTicks=new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve('ticket'),3000);
+    }); //(A)
+    const getPopcorn = new Promise((resolve,reject)=>resolve('popcorn'));
+    const getButter = new Promise((resolve,reject)=>resolve('butter'));
+    const getColdDrinks = new Promise((resolve,reject)=>resolve('coldDrinks'));
+    const getCandy = new Promise((resolve,reject)=>resolve('candy'));
+
+    let ticket=await promiseWifeBringsTicks;
+    console.log(`wife: i bought the ${ticket}`);
+    console.log('husband: we should go in');
+    console.log('wife: no i am hungry');
+
+    let [popcorn,coldDrinks,candy]=await Promise.all([getPopcorn,getColdDrinks,getCandy]);
+    console.log(`husband: i got ${popcorn}`);
+    console.log('husband: we should go in');
+    console.log('wife: i need butter on my popcorn');
+    
+    let butter=await getButter;
+    console.log(`husband: i got some ${butter} on popcorn`);
+    console.log('husband: anything else darling?');
+    console.log('wife: lets go we are getting late');
+    console.log('husband: thank you for the reminder *grins*');
+    console.log(`husband: i need some ${coldDrinks}`);
+    console.log('wife: me too!');
+
+    return ticket;
+}
+preMovie().then((m)=>console.log(`person3: shows ${m}`));
+
+console.log('person4: shows ticket');
+console.log('person5: shows ticket');
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+const posts=[
+    {title: 'Post One', body: 'This is post one'},
+    {title: 'Post Two', body: 'This is post two'}
+];
+const user={
+    name: 'User One',
+    lastActivityTime: new Date()
+}
+
+const tasks=async()=>{
+    const createPost=(post)=>new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            posts.push(post);
+            resolve(posts);
+        },1000);
+    });
+    const updateLastUserActivityTime=()=>new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            user.lastActivityTime=new Date();
+            resolve(user.lastActivityTime);     
+        },1000);
+    });
+    const deletion=()=>new Promise((resolve,reject)=>{
+        updateLastUserActivityTime();
+        setTimeout(()=>{
+            if(posts.length>0){
+                posts.pop();
+                resolve(posts);
+            }else
+                reject('Error: There are no posts to delete');
+        },1000);
+    });
+
+    try{
+        console.log("Before creating post,\nPosts =>",posts,`\nlastActivityTime => ${user.lastActivityTime}`)
+        const msg=await Promise.all([createPost({title:'Post Three',body:'This is post three'}),updateLastUserActivityTime()])
+        console.log("After creating post,\nPosts =>",msg[0],`\nlastActivityTime => ${msg[1]}`)
+        const msg1=await Promise.all([deletion(),updateLastUserActivityTime()]);
+        console.log("After Deletion,\nPosts =>",msg1[0],`\nlastActivityTime => ${msg1[1]}`);
+    }catch(e){
+        console.log(e);
+    }
+}
+tasks();
+</script> 
+</body>
+</html>

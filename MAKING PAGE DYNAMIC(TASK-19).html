@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Booking Appointment App</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>BOOKING APPOINTMENT APP</h1>
+    </header>
+
+    <section class="container">
+      <form id="my-form">
+        <h1>Enter User Details</h1>
+        <div class="msg"></div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="text" id="email">
+        </div>
+        <input class="btn" type="submit" value="Submit">
+      </form>
+
+      <ul id="users"></ul>
+        <!-- <ul class="items">
+        <li class="item">Item 1</li>
+        <li class="item">Item 2</li>
+        <li class="item">Item 3</li>
+       </ul> -->
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script>
+        const myForm = document.querySelector('#my-form');
+        const nameInput = document.querySelector('#name');
+        const emailInput = document.querySelector('#email');
+        const msg = document.querySelector('.msg');
+        const userList = document.querySelector('#users');
+
+        myForm.addEventListener('submit', onSubmit);
+        function onSubmit(e) {
+            e.preventDefault();
+            if(nameInput.value === '' || emailInput.value === '') {
+                msg.classList.add('error');
+                msg.innerHTML = 'Please enter all fields';
+                setTimeout(() => msg.remove(), 3000);
+            }
+            else {
+                let name=nameInput.value;
+                let email=emailInput.value;
+                let obj={
+                name,
+                email
+                }
+                axios
+                    .post("https://crudcrud.com/api/75805d9ba0c14b1fb70621e648ff60bf/appointmentData",obj)
+                    .then((response)=>showUsersOnScreen(response.data))
+                    .catch((err)=>console.log(err))
+                nameInput.value = '';
+                emailInput.value = '';
+            }
+        }
+
+        function showUsersOnScreen(obj) {
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(`${obj.name}:${obj.email}`));
+            let delBtn=document.createElement('input');
+            delBtn.type='button';
+            delBtn.className='deletebtn delete';
+            delBtn.value='DELETE';
+            li.appendChild(delBtn);
+            let editBtn=document.createElement('input');
+            editBtn.type='button';
+            editBtn.className='editbtn edit';
+            editBtn.value='EDIT';
+            li.appendChild(editBtn);
+            userList.appendChild(li);
+        }
+
+        window.addEventListener("DOMContentLoaded",()=>{
+            axios
+                .get("https://crudcrud.com/api/75805d9ba0c14b1fb70621e648ff60bf/appointmentData")
+                .then((response)=>{
+                    for(let i=0;i<response.data.length;i++){
+                        showUsersOnScreen(response.data[i])
+                    }
+                })
+                .catch((err)=>console.log(err))
+        })
+
+        userList.addEventListener('click',deleteItem);
+        function deleteItem(e) {
+            if(e.target.classList.contains('delete')) {
+              if(confirm('Click on "OK" to Delete Item')) {
+                userList.removeChild(e.target.parentElement);
+                let elementToDelete=(e.target.parentElement.textContent).split(':')[1];
+                axios
+                    .get("https://crudcrud.com/api/75805d9ba0c14b1fb70621e648ff60bf/appointmentData")
+                    .then(response=>{
+                        for(let i=0;i<response.data.length;i++){
+                            if(response.data[i].email===elementToDelete){
+                                let deletedUser=response.data[i].name;
+                                axios
+                                    .delete("https://crudcrud.com/api/75805d9ba0c14b1fb70621e648ff60bf/appointmentData/"+response.data[i]._id)
+                                    .then(response=>console.log(deletedUser,"has been removed!"))                                 
+                                    .catch(err=>console.log(err))
+                            }
+                        }
+                    })
+                }
+            }   
+        }
+
+        userList.addEventListener('click',editItem);
+        function editItem(e) {
+            if(e.target.classList.contains('edit')) {
+                if(confirm('Click on "OK" to Edit Item')) {
+                userList.removeChild(e.target.parentElement);
+                let detailsArr=(e.target.parentElement.textContent).split(':');
+                let nameField=document.getElementById('name');
+                let emailField=document.getElementById('email');
+                nameField.value=detailsArr[0];
+                emailField.value=detailsArr[1];
+                }        
+            }      
+        }
+    </script>
+  </body>
+</html>

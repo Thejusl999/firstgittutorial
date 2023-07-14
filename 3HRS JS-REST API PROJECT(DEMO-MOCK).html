@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SELLER-ADMIN PAGE</title>
+</head>
+<style>
+* {
+    margin: 0;
+}
+body {
+    font-family: Arial;
+    margin: 80px auto;
+    width: 80%;
+    border: 3px solid black;
+}
+header {
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+}
+.container1 {
+    padding: 40px 40px;
+    background-color: black;
+}
+.container2 {
+    padding: 20px 20px;
+    background-color: #bbb;
+}
+.container3 {
+    padding: 20px 20px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+#my-form {
+    padding: 25px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    text-align: left;
+}
+#my-form input[type='text'] {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+#my-form label{
+    font-weight: bold;
+}
+.btn {
+    width: 100%;
+    padding: 10px 15px;
+    background: black;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.btn:hover {
+    background: #444;
+}
+.button {
+    padding: 5px 5px;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.error {
+    background: orangered;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+}
+li{
+    display: inline;
+    font-weight: bold;
+    text-align: left;
+}
+</style>
+<body>
+    <div>
+    <header>
+        <h1>SELLER'S ADMIN PAGE</h1>
+    </header>
+    <div class="container1">
+        <form id="my-form">
+        <h2>ADD PRODUCTS:</h2><br>
+        <div class="msg"></div>
+        <label for="name">PRODUCT NAME:</label>
+        <input type="text" id="name">
+        <label for="price">SELLING PRICE:</label>
+        <input type="text" id="price">
+        <input class="btn" type="submit" value="ADD PRODUCT">
+        </form>
+    </div>
+    <div class="container2">
+        <h2>MY PRODUCTS:</h2>
+        <ul id="products"></ul>
+    </div>
+    <div class="container3">
+        <h4 style="display: inline">TOTAL VALUE WORTH OF PRODUCTS => ₹</h4>
+        <li id="worth"></li>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script>
+        let total=0;
+        const myForm = document.querySelector('#my-form');
+        const nameInput = document.querySelector('#name');
+        const priceInput = document.querySelector('#price');
+        const msg = document.querySelector('.msg');
+        const productList = document.querySelector('#products');
+        const productWorth= document.querySelector('li');
+        productWorth.textContent=total;
+        var baseURL="https://crudcrud.com/api/013ddf14bc7d4c06832bed42f8a68446";
+        
+        window.addEventListener("DOMContentLoaded", loadDetails)
+        async function loadDetails(){
+            try{
+                const response=await axios.get(baseURL+"/productData")
+                for(let i=0;i<response.data.length;i++)
+                    showProducts(response.data[i]);
+            }catch(error){productWorth.textContent=total}
+        }
+
+        myForm.addEventListener('submit', onSubmit);
+        function onSubmit(e) {
+            e.preventDefault();
+            if(nameInput.value === ''||priceInput.value === '') {
+                msg.classList.add('error');
+                msg.innerHTML = 'Please enter all fields';
+                setTimeout(() => msg.remove(), 3000);
+            }else {
+                let name=nameInput.value;
+                let price=priceInput.value;
+                addProduct(name,price);
+            }
+        }
+
+        async function addProduct(n,p){
+            try{
+                let product={name: n, price: p}
+                const response=await axios.post(baseURL+"/productData",product);
+                showProducts(response.data);
+            }catch(error){console.log(error)}
+            nameInput.value = '';
+            priceInput.value = '';
+        }
+
+        function showProducts(product) {
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(`${product.name}:₹${product.price}`));
+            let delProduct=document.createElement('input');
+            delProduct.type='button';
+            delProduct.className='button';
+            delProduct.value='Delete Product';
+            li.appendChild(delProduct);
+            productList.appendChild(document.createElement('br'));
+            productList.appendChild(li);
+            updateWorth(Number(product.price));
+        }
+        
+        function updateWorth(val){
+            total+=val;
+            productWorth.textContent=total;
+        }
+
+        productList.addEventListener('click',deductPrice);
+        async function deductPrice(e) {
+            try{
+                let deleteProduct=(e.target.parentElement.textContent).split(':')[0];
+                const response=await axios.get(baseURL+"/productData")
+                for(let i=0;i<response.data.length;i++){
+                    if(response.data[i].name===deleteProduct){
+                        await axios.delete(baseURL+"/productData/"+response.data[i]._id);
+                        location.reload();
+                    }
+                }
+            }catch(error){console.log(error)}
+        }       
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.user-li {
+    width: 100%;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.user-ul{
+    list-style: none;
+    margin-left:0;
+    padding:0;
+}

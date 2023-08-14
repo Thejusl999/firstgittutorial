@@ -1,0 +1,20 @@
+.form-controls{
+    padding-bottom: 10px;
+  }
+  .form-inputs{
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    padding:5px;
+  }
+  .form-select{
+    width:100%;
+    height:30px;
+  }
+  .form-actions{
+    background-color: purple;
+    color: white;
+    padding: 5px 10px;
+    font-size: 15px;
+    width:100%;
+  }

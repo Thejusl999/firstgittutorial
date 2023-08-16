@@ -1,0 +1,29 @@
+.meals {
+  text-align: left;
+  max-width: 60rem;
+  width: 90%;
+  margin: auto;
+  margin-top: 2rem;
+  position: relative;
+  background-color: white;
+  border-radius: 14px;
+  padding: 1rem;
+  color:black;
+}
+.eachMeal{
+  margin-bottom:2.5rem;
+  margin-top:0;
+}
+.name{
+  font-weight: bold;
+  margin-bottom: -20px;
+}
+.category{
+  font-style: italic;
+  font-weight: lighter;
+  margin-bottom: -20px;
+}
+.price{
+  color:#8a2b06;
+  margin-bottom: -20px;
+}

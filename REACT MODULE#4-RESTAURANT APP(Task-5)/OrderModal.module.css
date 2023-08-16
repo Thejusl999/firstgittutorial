@@ -1,0 +1,56 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 11;
+    background: rgba(0, 0, 0, 0.75);
+}
+.modal {
+    position: fixed;
+    top: 30vh;
+    left: 30%;
+    width: 40%;
+    z-index: 100;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 15px;
+}
+.header{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.text{
+    display: inline;
+    text-align: left;
+}
+.price{
+    text-align: right;
+    margin-top:-25px;
+}
+.button-div{
+    display:flex;
+    float:right;
+}
+.closeButton{
+    background-color: white;
+    border: 1px solid #ccc;
+    color:#b94517;
+    border-radius: 20px;
+    width:5rem;
+    font-size: 15px;
+    height:40px;
+    margin-right: 10px;
+}
+.orderButton{
+    background-color: #b94517;
+    border: 1px solid #b94517;
+    border-radius: 20px;
+    width:5rem;
+    font-size: 15px;
+    color: white;
+    height:40px;
+}

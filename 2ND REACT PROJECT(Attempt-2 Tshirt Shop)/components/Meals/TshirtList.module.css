@@ -1,0 +1,42 @@
+.meals {
+  text-align: left;
+  max-width: 45rem;
+  width: 90%;
+  margin: auto;
+  margin-top: 2rem;
+  position: relative;
+  background-color: #4d1601;
+  border-radius: 14px;
+  padding: 1rem;
+  color:black;
+}
+.eachMeal{
+  margin-left:10px;
+}
+.name{
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5rem;
+}
+.button-div{
+  text-align: right;
+  margin-top:-11rem;
+  font-weight: bold;
+  align-content: center;
+}
+.button{
+  background-color: #b94517;
+  border: 1px solid #b94517;
+  border-radius: 15px;
+  width:10rem;
+  font-size: 16px;
+  color: white;
+  margin-top: 8px;
+  height:30px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.button:hover{
+  background-color:rgba(231, 198, 52, 0.945);
+  color:black;
+}

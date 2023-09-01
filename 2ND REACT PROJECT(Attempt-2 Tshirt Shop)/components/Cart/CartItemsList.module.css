@@ -1,0 +1,102 @@
+.modal {
+    position: fixed;
+    top: 10vh;
+    left: 30%;
+    width: 40%;
+    z-index: 100;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 15px;
+    padding-top: 10px;
+}
+.header{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.text{
+    display: inline;
+    text-align: left;
+}
+.price{
+    text-align: right;
+    margin-top:-25px;
+}
+.button-div{
+    display:flex;
+    float:right;
+}
+.closeButton{
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid #b94517;
+    color:#b94517;
+    border-radius: 20px;
+    width:5rem;
+    font-size: 15px;
+    height:40px;
+    margin-right: 10px;
+}
+.closeButton:hover{
+    color:white;
+    background-color: #b94517;
+}
+.orderButton{
+    font-weight: bold;
+    background-color: #b94517;
+    border: 1px solid #b94517;
+    border-radius: 20px;
+    width:5rem;
+    font-size: 15px;
+    color: white;
+    height:40px;
+}
+.li{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+.itemName{
+    display:inline-block;
+    margin-bottom:0;
+    margin-top: 5px;
+}
+.itemPrice{
+    text-align: right;
+    margin-top: -50px;
+    margin-bottom: 30px;
+}
+.price-p{
+    display:inline-block;
+    color:#b94517;
+    padding-right:50px;
+    margin-bottom: 10px;
+}
+.quantityLabel{
+    display: inline-block;
+    text-align: center;
+    width:30px;
+    height:25px;
+    margin-bottom: 5px;
+}
+.buttonDiv{
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+}
+.buttons{
+    color:#b94517;
+    text-align: center;
+    width:40px;
+    height:30px;
+    border:1px solid #b94517;
+    border-radius: 5px;
+    margin-top: -70px;
+    font-size: 25px;
+    padding:0px;
+}
+.buttons:hover{
+    color:white;
+    background-color: #b94517;
+}

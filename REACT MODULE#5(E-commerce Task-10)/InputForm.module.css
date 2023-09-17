@@ -1,0 +1,13 @@
+.labels{
+    display: block;
+    font-weight: bold;
+    text-align:left;
+}
+.inputField{
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius:10px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

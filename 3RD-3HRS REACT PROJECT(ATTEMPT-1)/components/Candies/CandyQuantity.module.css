@@ -1,0 +1,22 @@
+.form-div{
+  text-align: right;
+  margin-top:-55px;
+  font-weight: bold;
+  align-content: center;
+}
+.button{
+  background-color: #b94517;
+  border: 1px solid #b94517;
+  border-radius: 15px;
+  width:5rem;
+  font-size: 16px;
+  color: white;
+  margin-top: 10px;
+  height:30px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.button:hover{
+  background-color:rgba(231, 198, 52, 0.945);
+  color:black;
+}

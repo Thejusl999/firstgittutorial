@@ -1,0 +1,20 @@
+.meals {
+  text-align: left;
+  max-width: 45rem;
+  width: 90%;
+  margin: auto;
+  margin-top: 2rem;
+  position: relative;
+  background-color: #4d1601;
+  border-radius: 14px;
+  padding: 1rem;
+  color:black;
+}
+.eachMeal{
+  margin-left:10px;
+  margin-bottom:15px;
+}
+.name{
+  font-weight: bold;
+  color: white;
+}

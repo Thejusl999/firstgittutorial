@@ -1,0 +1,37 @@
+import React,{useContext,useEffect} from 'react';
+import {Route,Switch,useHistory,Redirect,useLocation} from 'react-router-dom';
+import AuthForm from './components/Auth/AuthForm';
+import StartingPage from './pages/StartingPage';
+import ProfilePage from './pages/ProfilePage';
+import AuthContext from './store/auth-context';
+
+function App() {
+  const authCtx=useContext(AuthContext);
+  const history=useHistory();
+  const location=useLocation();
+  useEffect(()=>{
+    if(localStorage.length!==0&&(location.pathname==='/startPage'||location.pathname==='/')){
+    Object.entries(localStorage).forEach((key)=>{
+      authCtx.login(key[1])
+    })
+    history.push('/startPage');
+    }
+  },[])
+  return (
+    <>
+      <Switch>
+        <Route path='/' exact>
+          <AuthForm/>
+        </Route>
+        <Route path='/startPage'>
+          {authCtx.isLoggedIn?<StartingPage/>:<Redirect to='/'/>}
+        </Route>
+        <Route path='/profile'>
+        {authCtx.isLoggedIn?<ProfilePage/>:<Redirect to='/'/>}
+        </Route>
+      </Switch>
+    </>
+  );
+}
+
+export default App;

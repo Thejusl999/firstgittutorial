@@ -1,0 +1,70 @@
+.homepageDiv {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.sideCol {
+    padding: 5px;
+    text-align: center;
+    min-width: fit-content;
+    background-color: #eee;
+    border-right: 1px solid black;
+}
+
+.sideCol Button {
+    width: 6rem;
+    border-radius: 20px;
+}
+
+.emailsCol {
+    width: 100vw;
+    padding: 5px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.emails {
+    text-align: center;
+    position: fixed;
+    background-color:#eee;
+    border: 1px solid #aaa;
+    z-index:10;
+    margin-left:-5px;
+    margin-top:-5px;
+    height:2.8rem;
+    padding-top:8px;
+}
+
+.logoutBtn {
+    float: right;
+    margin-top: -34px;
+    margin-bottom: -1px;
+}
+
+.inboxDiv {
+    z-index: 1;
+    display: block;
+    padding: 0;
+    border-bottom: 1px solid #aaa;
+    overflow: hidden;
+    max-height: 36px;
+}
+
+.inboxItem {
+    margin-top: 35px;
+    width: 100vw;
+    position: relative;
+    left: 6.5px;
+}
+
+.inboxItem ul {
+    list-style: none;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.inboxItem h6 {
+    font-weight: normal;
+}

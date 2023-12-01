@@ -1,0 +1,14 @@
+.item{
+  display:flex;
+  flex-direction: column;
+  background-color: lightpink;
+  margin-bottom: -15px;
+}
+.item div{
+  padding-inline-start: 1rem;
+}
+.noTodos{
+  text-align: center;
+  padding: 10px;
+  margin-top: -25px;
+}
